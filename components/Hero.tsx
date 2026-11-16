@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react';
 
+const phrases = [
+  "Romil Movaliya",
+  "Software Engineer",
+  "AWS Community Builder & Solutions Architect",
+  "Production Cloud & Mobile Architect"
+];
+
 export default function Hero() {
   const [text, setText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const phrases = [
-    "Romil Movaliya",
-    "Software Engineer",
-    "AWS Community Builder & Solutions Architect",
-    "Production Cloud & Mobile Architect"
-  ];
 
   useEffect(() => {
     const currentPhrase = phrases[phraseIndex];

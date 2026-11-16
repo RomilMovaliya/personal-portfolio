@@ -521,7 +521,7 @@ export default function NrexShowcase({ isStandalonePage = false }: NrexShowcaseP
               ].map((p) => (
                 <button
                   key={p.key}
-                  onClick={() => setActivePersona(p.key as any)}
+                  onClick={() => setActivePersona(p.key as 'customer' | 'rider' | 'hub' | 'shop')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
                     activePersona === p.key
                       ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'

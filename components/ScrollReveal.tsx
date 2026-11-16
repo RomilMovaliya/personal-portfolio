@@ -44,7 +44,8 @@ export default function ScrollReveal({
       observer.observe(element);
       return () => observer.disconnect();
     } else {
-      setIsVisible(true);
+      const timer = setTimeout(() => setIsVisible(true), 0);
+      return () => clearTimeout(timer);
     }
   }, [threshold]);
 

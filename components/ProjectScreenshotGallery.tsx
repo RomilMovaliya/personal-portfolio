@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export interface ScreenshotItem {
   id: string;
@@ -35,21 +35,26 @@ export default function ProjectScreenshotGallery({
   const [selectedScreenIndex, setSelectedScreenIndex] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
 
-  const filteredItems = items.filter(
-    (item) => activeCategory === 'all' || item.category === activeCategory
+  const filteredItems = useMemo(
+    () => items.filter((item) => activeCategory === 'all' || item.category === activeCategory),
+    [items, activeCategory]
   );
 
   const selectedItem = selectedScreenIndex !== null ? filteredItems[selectedScreenIndex] : null;
 
-  const handleNext = useCallback(() => {
-    if (selectedScreenIndex === null) return;
-    setSelectedScreenIndex((prev) => ((prev! + 1) % filteredItems.length));
-  }, [selectedScreenIndex, filteredItems.length]);
+  const handleNext = () => {
+    setSelectedScreenIndex((prev) => {
+      if (prev === null) return null;
+      return (prev + 1) % filteredItems.length;
+    });
+  };
 
-  const handlePrev = useCallback(() => {
-    if (selectedScreenIndex === null) return;
-    setSelectedScreenIndex((prev) => (prev! === 0 ? filteredItems.length - 1 : prev! - 1));
-  }, [selectedScreenIndex, filteredItems.length]);
+  const handlePrev = () => {
+    setSelectedScreenIndex((prev) => {
+      if (prev === null) return null;
+      return prev === 0 ? filteredItems.length - 1 : prev - 1;
+    });
+  };
 
   // Keyboard navigation for modal
   useEffect(() => {
@@ -62,7 +67,7 @@ export default function ProjectScreenshotGallery({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedScreenIndex, handleNext, handlePrev]);
+  });
 
   return (
     <div className="w-full my-12">
