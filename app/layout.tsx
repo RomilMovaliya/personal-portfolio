@@ -4,6 +4,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Romil Movaliya | Software Engineer | AWS Community Builder",
   description: "Software Engineer, AWS Community Builder, and AWS Certified Solutions Architect. Architecting high-performance applications for freight logistics, UK courier delivery, and cloud platforms.",
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
